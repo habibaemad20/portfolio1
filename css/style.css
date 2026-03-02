@@ -134,20 +134,25 @@ h6 {
     background-position: center;
     background-size: cover;
     position: relative;
+    padding: 80px 0;
 }
+
 #hero::before {
     content: "";
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.65);
 }
+
 #hero .container {
     position: relative;
     z-index: 2;
 }
+
 .hero-text {
     max-width: 550px;
 }
+
 .hero-text h1 {
     font-size: clamp(2rem, 5vw, 3.2rem);
     margin-bottom: 20px;
@@ -163,23 +168,27 @@ h6 {
 
 /* Hero Image */
 .hero-image img {
-  width: 100%;
-    border-radius: 50%; 
-  border: 3px solid var(--main-color);
-    max-width: min(430px,90%);
+    width: 100%;
+    border-radius: 50%;
+    border: 3px solid var(--main-color);
+    max-width: min(430px, 90%);
     height: auto;
-     animation: floatImage 4s ease-in-out infinite;
+    animation: floatImage 4s ease-in-out infinite;
     box-shadow: 0 0 25px rgba(255, 26, 26, 0.5);
+    transition: 0.4s; 
 }
+
 .hero-image img:hover {
     transform: scale(1.05);
     box-shadow: 0 0 40px rgba(255, 26, 26, 0.6);
 }
-.image-glowing{
+
+.image-glowing {
     position: relative;
     display: inline-block;
 }
-.image-glowing::before{
+
+.image-glowing::before {
     content: "";
     position: absolute;
     width: 120%;
@@ -190,13 +199,12 @@ h6 {
     transform: translate(-50%, -50%);
     filter: blur(40px);
     z-index: 0;
+    animation: glowing 6s ease-in-out infinite alternate;
 }
+
 .hero-image img {
     position: relative;
     z-index: 2;
-}
-.image-glowing::before {
-    animation: glowing 6s ease-in-out infinite alternate;
 }
 @keyframes glowing {
     from {
@@ -206,17 +214,27 @@ h6 {
         transform: translate(-50%, -50%) scale(1.1);
     }
 }
+
 @keyframes floatImage {
-    0% {
-        transform: translateY(0px);
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+    .hero-text {
+        text-align: center;
+        margin-top: 20px;
     }
-    50% {
-        transform: translateY(-15px);
-    }
-    100% {
-        transform: translateY(0px);
+
+    .hero-image {
+        margin-bottom: 20px;
+        text-align: center;
     }
 }
+
+/* Mobile */
 @media (max-width: 768px) {
 
     #hero {
@@ -232,7 +250,13 @@ h6 {
         max-width: 260px;
         margin-top: 20px;
     }
+    .image-glowing::before {
+        width: 140%;
+        height: 140%;
+        filter: blur(30px);
+    }
 }
+
 /* Button */
 .btn-danger {
     background-color: #800000;
@@ -247,41 +271,21 @@ h6 {
     border-color: #ff1a1a;
 }
 
-@media (max-width: 992px) {
-    .hero-text {
-        text-align: center;
-        margin-top: 20px;
-    }
-    .hero-image {
-        margin-bottom: 20px;
-    }
-}
-@media (max-width: 768px) {
-    .image-wrapper::before {
-        width: 140%;
-        height: 140%;
-        filter: blur(30px);
-    }
-}
 /* Sections */
-section {
-    padding: 80px 50px;
-}
-
 /* About Section */
 #about {
     position: relative;
     overflow: hidden;
     padding: 70px 35px;
     background: var(--dark-color);
+    text-align: center; /* يخلي الكارد في الوسط */
 }
 
 .about-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start; 
+    align-items: center; 
     flex-wrap: wrap;
-    gap: 20px;
 }
 
 .about-card {
@@ -290,11 +294,11 @@ section {
     background: var(--card-color);
     padding: 35px;
     border-radius: 20px;
-    position: relative;
-    transition: all 0.4s;
     border: 1px solid rgba(255,255,255,0.05);
     box-shadow: 0 7px 15px rgba(255, 26, 26, 0.15);
-    animation: aboutFade 1s ease forwards;
+    transition: all 0.5s ease;
+    opacity: 0; /* خفيته للأنيميشن عند scroll */
+    transform: translateY(40px);
 }
 
 .about-card:hover {
@@ -310,21 +314,10 @@ section {
 }
 
 .about-card p {
-    color: #ccc; /* أو var(--text-color) لو معرفه */
+    color: #ccc;
     line-height: 1.8;
     font-size: clamp(1rem, 1.2vw, 1.1rem);
     margin-bottom: 15px;
-}
-
-@keyframes aboutFade {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* Section Header */
@@ -358,24 +351,17 @@ section {
 }
 
 @media (max-width:768px) {
-    #about {
-        padding: 50px 20px;
-    }
-    .about-card {
-        padding: 25px;
-    }
-    .section-header h2 {
-        font-size: 2rem;
-    }
+    #about { padding: 50px 20px; }
+    .about-card { padding: 25px; }
+    .section-header h2 { font-size: 2rem; }
 }
 /* Education Section */
 #education {
     padding: 70px 35px;
     background: var(--dark-color);
+    text-align: center; /
 }
-
 #education h2 {
-    text-align: center;
     color: var(--secondary-color);
     font-size: clamp(2rem, 4vw, 2.4rem);
     font-weight: 700;
@@ -391,7 +377,7 @@ section {
     display: block;
     margin: 8px auto 0;
     border-radius: 5px;
-    animation:lineMove 2s ease-in-out infinite alternate;
+    animation: lineMove 1.5s ease-in-out infinite alternate;
 }
 
 .education-card {
@@ -402,12 +388,13 @@ section {
     margin: 0 auto;
     text-align: center;
     box-shadow: 0 10px 30px rgba(255, 26, 26, 0.15);
-    transition: all 0.4s;
-    animation: fadeUp 1s ease forwards;
+    transition: all 0.5s ease;
+    opacity: 0;  
+    transform: translateY(40px);
 }
 
 .education-card:hover {
-    transform: translateY(-6px) scale(1.02);
+    transform: translateY(-8px) scale(1.02);
     box-shadow: 0 20px 40px rgba(255, 26, 26, 0.2);
 }
 
@@ -424,27 +411,10 @@ section {
     line-height: 1.6;
 }
 
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 @media (max-width:768px) {
-    #education {
-        padding: 50px 20px;
-    }
-    .education-card {
-        padding: 25px 20px;
-    }
-    #education h2 {
-        font-size: 2rem;
-    }
+    #education { padding: 50px 20px; }
+    .education-card { padding: 25px 20px; }
+    #education h2 { font-size: 2rem; }
 }
 /* Projects Section */
 #projects {
@@ -452,36 +422,18 @@ section {
     background: var(--dark-color);
 }
 
-.section-header h2 {
-    font-size: clamp(2rem, 4vw, 2.4rem);
-    color: var(--secondary-color);
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-}
-
-.section-header h2::after {
-    content: "";
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--secondary-color), var(--main-color));
-    display: block;
-    margin: 8px auto 0;
-    border-radius: 5px;
-    animation:lineMove 2s ease-in-out infinite alternate;
-}
-
 .projects-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
     justify-content: center;
 }
+
+/* Project Card */
 .project-card {
     background: var(--card-color);
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 17px;
     text-align: center;
     width: 300px;
     height: 380px; 
@@ -489,12 +441,16 @@ section {
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    transition: 0.3s all;
+    transition: all 0.2s ease;
+    opacity: 0;
+    transform: translateY(40px);
+    position: relative;
+    overflow: hidden;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 30px rgba(128, 0, 0, 0.7);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 0 40px rgba(255, 26, 26, 0.35);
 }
 
 .project-card img {
@@ -503,20 +459,26 @@ section {
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 15px;
+    transition:all 0.5s ease;
+    filter: brightness(0.9);
+}
+
+.project-card.show img {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 26, 26, 0.5);
 }
 
 .project-card h3 {
     color: var(--secondary-color);
     margin-bottom: 10px;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
 }
 
 .project-card p {
     font-size: 0.95rem;
-    color: var(--text-color);
+    color: #ccc;
     margin-bottom: 15px;
 }
-
 .project-card .btn {
     padding: 8px 20px;
     border-radius: 20px;
@@ -524,15 +486,17 @@ section {
     color: #fff;
     text-decoration: none;
     margin: 3px;
+    transition: all 0.3s ease;
 }
 
 .project-card .btn:hover {
     background: var(--secondary-color);
 }
+
 @media (max-width: 768px) {
     .project-card {
-        width: 90%; 
-        height: auto; 
+        width: 90%;
+        height: auto;
     }
     .project-card img {
         height: 200px;
@@ -561,10 +525,8 @@ section {
     display: block;
     margin: 8px auto 0;
     border-radius: 5px;
-    animation:lineMove 2s ease-in-out infinite alternate;
+    animation: lineMove 2s ease-in-out infinite alternate;
 }
-
-/* Skills Cards */
 .skills-container {
     display: flex;
     flex-wrap: wrap;
@@ -575,20 +537,21 @@ section {
 .skill-card {
     background: var(--card-color);
     padding: 15px;
-    border-radius: 15px;
+    border-radius: 20px;
     text-align: center;
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    transition: 0.3s;
-    width: 200px;
+    transition: all 0.4s ease;
+    width: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 7px;
+    opacity: 0; 
+    transform: translateY(40px); 
 }
 
 .skill-card i {
-    font-size: 2rem;
-    color: var(--secondary-color);
+    font-size: 2.5rem;
 }
 
 .skill-card h3 {
@@ -602,10 +565,15 @@ section {
 }
 
 .skill-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(128,0,0,0.7);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 0 30px rgba(255, 26, 26, 0.6);
 }
 
+@media (max-width: 768px) {
+    .skill-card {
+        width: 90%;
+    }
+}
 /* Services Section */
 #services {
     padding: 70px 35px;
@@ -636,27 +604,28 @@ section {
 .services-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 25px;
     justify-content: center;
 }
 
 .service-card {
     background: var(--card-color);
-    padding: 15px;
+    padding: 20px;
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    transition: 0.3s;
-    width: 200px;
+    transition: all 0.4s ease;
+    width: 190px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 7px;
+    opacity: 0; 
+    transform: translateY(40px); 
 }
 
 .service-card i {
-    font-size: 2rem;
-    color: var(--secondary-color);
+    font-size: 2.5rem;
 }
 
 .service-card h3 {
@@ -670,22 +639,24 @@ section {
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px rgba(128,0,0,0.7);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 0 30px rgba(255,26,26,0.6);
 }
 
-
-@media(max-width:768px){
-    .skill-card, .service-card {
+/* Responsive */
+@media (max-width: 768px) {
+    .service-card {
         width: 90%;
     }
 }
 
-@media(max-width:480px){
-    .skill-card, .service-card {
+@media (max-width: 480px) {
+    .service-card {
         width: 95%;
     }
 }
+/* contact */
+/* Contact Section */
 #contact {
     padding: 70px 35px;
     background: var(--dark-color);
@@ -695,7 +666,7 @@ section {
 .contact-wrapper {
     display: flex;
     gap: 50px;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -723,7 +694,7 @@ section {
     display: block;
     margin: 8px 0 20px 0;
     border-radius: 5px;
-    animation:lineMove 2s ease-in-out infinite alternate;
+    animation: lineMove 2s ease-in-out infinite alternate;
 }
 
 .contact-intro {
@@ -757,6 +728,7 @@ section {
     flex: 1;
     min-width: 280px;
 }
+
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -768,9 +740,9 @@ section {
     transition: transform 0.3s, box-shadow 0.3s;
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeUp 0.8s ease forwards;
 }
 
+/* Inputs and Button */
 .contact-form input,
 .contact-form textarea {
     padding: 14px;
@@ -785,7 +757,6 @@ section {
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
     color: #888;
-    transition: 0.3s;
 }
 
 .contact-form input:focus,
@@ -813,16 +784,30 @@ section {
     box-shadow: 0 0 25px rgba(255,26,26,0.7);
 }
 
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Fade up animation for scroll */
+.contact-form.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.8s ease-out;
 }
+
+/* Responsive adjustments */
 @media(max-width: 900px){
     .contact-wrapper {
         flex-direction: column;
         gap: 35px;
+    }
+}
+
+@media(max-width: 480px){
+    #contact {
+        padding: 50px 20px;
+    }
+    .contact-form {
+        padding: 25px 20px;
+    }
+    .contact-left h2 {
+        font-size: 2rem;
     }
 }
 /* Footer */
