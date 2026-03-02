@@ -695,7 +695,7 @@ section {
 .contact-wrapper {
     display: flex;
     gap: 50px;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: auto;
     align-items: flex-start;
     flex-wrap: wrap;
